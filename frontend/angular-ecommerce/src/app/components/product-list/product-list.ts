@@ -16,6 +16,8 @@ export class ProductList implements OnInit{
 
   currentCategoryId: number = 1;
 
+  searchMode: boolean = false;
+
 
   //route: ActivatedRoute: là một service cung cấp thông tin về route hiện tại.
   //Để lấy thông tin từ route, chúng ta cần inject ActivatedRoute vào constructor của component.
@@ -31,6 +33,28 @@ export class ProductList implements OnInit{
     this.listProducts();
   }
   listProducts() {
+    this.searchMode = this.route.snapshot.paramMap.has("keyword");
+    if(this.searchMode){
+      this.handleSearchProducts();
+    }
+    else{
+      this.handleListProducts();
+    }
+  }
+
+  handleSearchProducts(){
+    const theKeyWord: string = this.route.snapshot.paramMap.get('keyword')!;
+
+    //now search for products using keyword
+    this.productService.searchProducts(theKeyWord).subscribe(
+      data => {
+        this.products = data;
+      }
+    );
+
+  }
+
+  handleListProducts(){
     //check if id parameter is available
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');//use snapshot to get the current route snapshot
     if(hasCategoryId){
@@ -42,8 +66,6 @@ export class ProductList implements OnInit{
       this.currentCategoryId = 1;
     }
 
-
-
     this.productService.getProductList(this.currentCategoryId).subscribe(
       data => {// assign results to the product array
         this.products = data;
@@ -52,5 +74,6 @@ export class ProductList implements OnInit{
     //subscribe:  "Phương thức đó sẽ chỉ được thực thi khi bạn thực hiện việc subscribe() vào observable."
 
   }
+
 
 }
