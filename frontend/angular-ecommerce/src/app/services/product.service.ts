@@ -21,6 +21,13 @@ export class ProductService {
     Observables trong RxJS là "lazy" (lười biếng) — chúng không làm gì cả cho đến khi có người subscribe.
   */
 
+  getProduct(theProductId: number):Observable<Product> {
+    //need to build url based on product id
+    const productUrl = `${this.baseUrl}/${theProductId}`;
+    return this.httpClient.get<Product>(productUrl);
+  }
+    
+
   getProductList(theCategoryId: number):Observable<Product[]>{
     //@TODO: need to build URL based on category id
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
@@ -43,6 +50,8 @@ export class ProductService {
       map(response => response._embedded.productCategories)
     );
   }
+
+  
 
   
 }
