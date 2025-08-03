@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../common/product';
@@ -15,8 +16,15 @@ export class ProductList implements OnInit{
   products: Product[] = [];
 
   currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
+
 
   searchMode: boolean = false;
+
+  //new properties for pagination
+  thePageNumber: number = 1;
+  thePageSize: number = 10;
+  theTotalElements: number = 0;
 
 
   //route: ActivatedRoute: là một service cung cấp thông tin về route hiện tại.
@@ -66,9 +74,28 @@ export class ProductList implements OnInit{
       this.currentCategoryId = 1;
     }
 
-    this.productService.getProductList(this.currentCategoryId).subscribe(
-      data => {// assign results to the product array
-        this.products = data;
+    //check if we have a different category than previous
+    //Note: angular will reuse a component if it is currently being view 
+
+    //if we have a different category id than previous
+    //then set thePageNumber back to 1
+
+    if(this.previousCategoryId != this.currentCategoryId){
+      this.thePageNumber=1;
+    }
+
+    this.previousCategoryId = this.currentCategoryId;
+
+
+
+    this.productService.getProductListPaginate(
+      this.thePageNumber-1,this.thePageSize,this.currentCategoryId
+    ).subscribe(
+      data=>{
+        this.products = data._embedded.products;
+        this.thePageNumber = data.page.number+1;
+        this.thePageSize = data.page.size;
+        this.theTotalElements = data.page.totalElements;
       }
     );
     //subscribe:  "Phương thức đó sẽ chỉ được thực thi khi bạn thực hiện việc subscribe() vào observable."
