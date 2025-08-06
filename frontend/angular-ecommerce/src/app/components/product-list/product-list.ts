@@ -14,6 +14,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 })
 export class ProductList implements OnInit{
 
+
   products: Product[] = [];
 
   currentCategoryId: number = 1;
@@ -129,6 +130,10 @@ export class ProductList implements OnInit{
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     }
+  }
+
+  addToCart(_t5: Product) {
+    throw new Error('Method not implemented.');
   }
   
 }
