@@ -4,6 +4,8 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../common/product';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { CartItem } from '../../common/cart-item';
+import { CartService } from '../../services/cart.service';
 
 
 @Component({
@@ -33,7 +35,8 @@ export class ProductList implements OnInit{
 
   //route: ActivatedRoute: là một service cung cấp thông tin về route hiện tại.
   //Để lấy thông tin từ route, chúng ta cần inject ActivatedRoute vào constructor của component.
-  constructor(private productService: ProductService, private route: ActivatedRoute){
+  constructor(private productService: ProductService, private cartService: CartService,
+    private route: ActivatedRoute){
 
   }
   ngOnInit(): void {//similar to @PostConstruct
@@ -132,8 +135,9 @@ export class ProductList implements OnInit{
     }
   }
 
-  addToCart(_t5: Product) {
-    throw new Error('Method not implemented.');
+  addToCart(theProduct: Product) {
+    const theCartItem = new CartItem(theProduct);
+    this.cartService.addToCart(theCartItem);
   }
   
 }
