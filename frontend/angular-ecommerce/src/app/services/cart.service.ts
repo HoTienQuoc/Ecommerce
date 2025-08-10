@@ -12,6 +12,8 @@ import { Injectable } from '@angular/core';
  * The event will be sent to all of the Subscribers
  */
 export class CartService {
+    //check if we found it
+    
     cartItems: CartItem[] = [];
 
     totalPrice: Subject<number> = new Subject<number>();
@@ -39,7 +41,7 @@ export class CartService {
         }
         if(alreadyExistsInCart){
             if (existingCartItem) {
-                existingCartItem.quatity++;
+                existingCartItem.quantity++;
             }
         }
         else{
@@ -55,8 +57,8 @@ export class CartService {
         let totalQuantityValue: number = 0;
 
         for(let currentCartItem of this.cartItems){
-            totalPriceValue += currentCartItem.quatity * currentCartItem.unitPrice;
-            totalQuantityValue += currentCartItem.quatity
+            totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
+            totalQuantityValue += currentCartItem.quantity
         }
 
         // publish the new values ... all subscribers will receive the new data
@@ -77,7 +79,26 @@ export class CartService {
     }
     logCartData(totalPriceValue: number, totalQuantityValue: number) {
         for(let tempCartItem of this.cartItems){
-            const subTotalPrice = tempCartItem.quatity * tempCartItem.unitPrice;
+            const subTotalPrice = tempCartItem.quantity * tempCartItem.unitPrice;
+        }
+    }
+
+    decrementQuantity(theCartItem: CartItem) {
+        theCartItem.quantity--;
+        if(theCartItem.quantity===0){
+            this.remove(theCartItem);
+        }
+        else{
+            this.computeCartTotals();
+        }
+    }
+    remove(theCartItem: CartItem) {
+        //get index of item in the array;
+        const itemIndex = this.cartItems.findIndex(tempCartItem=>tempCartItem.id === theCartItem.id);
+        //if found, remove the item from the array at the given index
+        if(itemIndex>-1){
+            this.cartItems.splice(itemIndex,1);
+            this.computeCartTotals();
         }
     }
 }

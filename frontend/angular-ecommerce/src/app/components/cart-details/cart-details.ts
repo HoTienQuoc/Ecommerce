@@ -1,15 +1,17 @@
 import { CartService } from './../../services/cart.service';
 import { CartItem } from './../../common/cart-item';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart-details',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './cart-details.html',
   styleUrl: './cart-details.scss'
 })
 export class CartDetails implements OnInit{
-  cartItem: CartItem[] = [];
+
+  cartItems: CartItem[] = [];
   totalPrice: number = 0;
   totalQuantity: number = 0;
   
@@ -20,7 +22,7 @@ export class CartDetails implements OnInit{
   }
   listCartDetails() {
     //get a handle to the cart items
-    this.cartItem = this.cartService.cartItems;
+    this.cartItems = this.cartService.cartItems;
     //subscribe to the cart totalPrice
     this.cartService.totalPrice.subscribe(
       data => this.totalPrice = data
@@ -32,4 +34,16 @@ export class CartDetails implements OnInit{
     //compute cart total price and quantity
     this.cartService.computeCartTotals();
   }
+
+
+  incrementQuantity(theCartItem: CartItem) {
+    this.cartService.addToCart(theCartItem);
+  }
+  decrementQuantity(theCartItem: CartItem) {
+    this.cartService.decrementQuantity(theCartItem);
+  }
+  remove(theCartItem: CartItem) {
+    this.cartService.remove(theCartItem);
+  }
+
 }
