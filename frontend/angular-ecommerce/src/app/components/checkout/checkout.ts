@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './checkout.scss'
 })
 export class Checkout implements OnInit{
+
+
+
   checkoutFormGroup!: FormGroup;
 
   constructor(private formBuilder: FormBuilder){
@@ -20,7 +23,45 @@ export class Checkout implements OnInit{
         firstName: [''],
         lastName: [''],
         email: [''],
+      }),
+      shippingAddress: this.formBuilder.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        country:[''],
+        zipCode: ['']
+      }),
+      billingAddress: this.formBuilder.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        country:[''],
+        zipCode: ['']
+      }),
+      creditCard: this.formBuilder.group({
+        cardType: [''],
+        nameOnCard: [''],
+        cardNumber: [''],
+        securityCode:[''],
+        expirationMonth: [''],
+        expirationYear: [''],
       })
     })
   }
+  onSubmit(){
+
+  }
+
+  copyShippingAddressToBillingAddress(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+  
+    if (isChecked) {
+      // Copy shipping address to billing address
+      this.checkoutFormGroup.controls['billingAddress'].setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
+    } else {
+      // Optionally clear billing address or allow manual entry
+      this.checkoutFormGroup.controls['billingAddress'].reset();
+    }
+  }
+  
 }
