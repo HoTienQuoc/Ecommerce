@@ -176,7 +176,14 @@
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="cardType" type="text">
+                                <select formControlName="cardType">
+                                    <option>
+                                        Visa
+                                    </option>
+                                    <option>
+                                        Mastercard
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -216,7 +223,14 @@
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="expirationMonth" type="text">
+                                <select formControlName="expirationMonth">
+                                    <option>
+                                        Visa
+                                    </option>
+                                    <option>
+                                        Mastercard
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -226,10 +240,23 @@
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="expirationYear" type="text">
-                            </div>
+                                <select formControlName="expirationYear">
+                                    <option>
+                                        Visa
+                                    </option>
+                                    <option>
+                                        Mastercard
+                                    </option>
+                                </select>                            </div>
                         </div>
                     </div>
+                </div>
+                <!-- Order details -->
+                <div class="form-area">
+                    <h3>Review Your Order</h3>
+                    <p>Total Quantity: {{totalQuantity}}</p>     
+                    <p>Shipping: Free</p>
+                    <p>Total Price: {{totalPrice|currency:'USD'}}</p>               
                 </div>
                 <!-- submit button -->
                 <div class="text-center">

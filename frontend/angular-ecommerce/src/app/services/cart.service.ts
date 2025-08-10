@@ -12,6 +12,7 @@ import { Injectable } from '@angular/core';
  * The event will be sent to all of the Subscribers
  */
 export class CartService {
+
     //check if we found it
     
     cartItems: CartItem[] = [];
