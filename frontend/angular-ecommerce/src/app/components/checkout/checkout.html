@@ -224,12 +224,11 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="expirationMonth">
-                                    <option>
-                                        Visa
-                                    </option>
-                                    <option>
-                                        Mastercard
-                                    </option>
+                                    @for(month of creditCardMonths; track month){
+                                        <option>
+                                            {{month}}
+                                        </option>
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -241,13 +240,13 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="expirationYear">
-                                    <option>
-                                        Visa
-                                    </option>
-                                    <option>
-                                        Mastercard
-                                    </option>
-                                </select>                            </div>
+                                    @for(year of creditCardYears; track year){
+                                        <option>
+                                            {{year}}
+                                        </option>
+                                    }
+                                </select>                            
+                            </div>
                         </div>
                     </div>
                 </div>
