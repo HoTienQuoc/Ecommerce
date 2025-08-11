@@ -223,7 +223,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="expirationMonth">
+                                <select formControlName="expirationMonth" (change)="handleMonthsAndYears()">
                                     @for(month of creditCardMonths; track month){
                                         <option>
                                             {{month}}

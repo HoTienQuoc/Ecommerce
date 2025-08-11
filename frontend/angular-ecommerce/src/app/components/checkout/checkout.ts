@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Luv2ShopFormServiceService } from '../../services/luv2-shop-form-service.service';
+import { start } from '@popperjs/core';
 
 @Component({
   selector: 'app-checkout',
@@ -79,6 +80,28 @@ export class Checkout implements OnInit{
       // Optionally clear billing address or allow manual entry
       this.checkoutFormGroup.controls['billingAddress'].reset();
     }
+  }
+
+  handleMonthsAndYears() {
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear: number = new Date().getFullYear();
+    //Read the selected year from the form
+    const selectedYear: number = Number(creditCardFormGroup?.value.expirationYear);
+
+    // if the current year equals the selected year, then start with the current month
+    let startMonth: number;
+    if(currentYear === selectedYear){
+      startMonth = new Date().getMonth() + 1;
+    } 
+    else{
+      startMonth = 1;
+    }
+    this.luv2ShopFormServiceService.getCreditCardMonth(startMonth).subscribe(
+      data => {
+        this.creditCardMonths = data;
+      }
+    );
   }
   
 }
