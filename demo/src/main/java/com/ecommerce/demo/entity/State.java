@@ -1,37 +1,33 @@
 package com.ecommerce.demo.entity;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Entity
-@Table(name = "Country")
+@Table(name = "State")
 @Getter
 @Setter
-public class Country {
+public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private int id;
 
-    @Column(name = "Code")
-    private String code;
-
     @Column(name = "Name")
     private String name;
 
-    //Todo: set up one to many with states
-    @OneToMany(mappedBy = "country")
-    @JsonIgnore()//will ignore the states
-    private List<State> state;
+    @ManyToOne()
+    @JoinColumn(name="country_id")
+    private String country;
+
 }
