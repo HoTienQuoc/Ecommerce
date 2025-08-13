@@ -48,26 +48,58 @@ export class Checkout implements OnInit{
         ]),
       }),
       shippingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        state: [''],
-        country:[''],
-        zipCode: ['']
+        street: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        city: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        state: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        country:new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        zipCode: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
       }),
       billingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        state: [''],
-        country:[''],
-        zipCode: ['']
+        street: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        city: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        state: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        country:new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        zipCode: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
       }),
       creditCard: this.formBuilder.group({
-        cardType: [''],
-        nameOnCard: [''],
-        cardNumber: [''],
-        securityCode:[''],
-        expirationMonth: [''],
-        expirationYear: [''],
+        cardType: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        nameOnCard: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        cardNumber: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        securityCode:new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        expirationMonth: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
+        expirationYear: new FormControl('', [
+          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+        ]),
       })
     });
     //populate credit card months
