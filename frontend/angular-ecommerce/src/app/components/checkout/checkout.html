@@ -97,6 +97,18 @@
                                         </option>
                                     }
                                 </select>
+                                @if(shippingAddressToBillingCountry!.invalid && 
+                                    (shippingAddressToBillingCountry!.dirty || shippingAddressToBillingCountry!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (shippingAddressToBillingCountry!.hasError('required')||
+                                        shippingAddressToBillingCountry!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                              Country is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -107,6 +119,18 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="street" type="text">
+                                @if(shippingAddressToBillingStreet!.invalid && 
+                                    (shippingAddressToBillingStreet!.dirty || shippingAddressToBillingStreet!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (shippingAddressToBillingStreet!.hasError('required')||
+                                        shippingAddressToBillingStreet!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                              Street is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -117,6 +141,18 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="city" type="text">
+                                @if(shippingAddressToBillingCity!.invalid && 
+                                    (shippingAddressToBillingCity!.dirty || shippingAddressToBillingCity!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (shippingAddressToBillingCity!.hasError('required')||
+                                        shippingAddressToBillingCity!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                            City is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -133,6 +169,18 @@
                                         </option>
                                     }
                                 </select>
+                                @if(shippingAddressToBillingState!.invalid && 
+                                    (shippingAddressToBillingState!.dirty || shippingAddressToBillingState!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (shippingAddressToBillingState!.hasError('required')||
+                                        shippingAddressToBillingState!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                                State is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -143,6 +191,18 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="zipCode" type="text">
+                                @if(shippingAddressToBillingZipCode!.invalid && 
+                                    (shippingAddressToBillingZipCode!.dirty || shippingAddressToBillingZipCode!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (shippingAddressToBillingZipCode!.hasError('required')||
+                                        shippingAddressToBillingZipCode!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                                Zipcode is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>

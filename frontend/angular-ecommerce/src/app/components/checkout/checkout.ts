@@ -55,10 +55,10 @@ export class Checkout implements OnInit{
           Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
         ]),
         state: new FormControl('', [
-          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+          Validators.required,
         ]),
         country:new FormControl('', [
-          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+          Validators.required,
         ]),
         zipCode: new FormControl('', [
           Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
@@ -72,10 +72,10 @@ export class Checkout implements OnInit{
           Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
         ]),
         state: new FormControl('', [
-          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+          Validators.required,
         ]),
         country:new FormControl('', [
-          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+          Validators.required,
         ]),
         zipCode: new FormControl('', [
           Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
@@ -130,6 +130,22 @@ export class Checkout implements OnInit{
   }
   get email(){
     return this.checkoutFormGroup.get('customer.email');
+  }
+
+  get shippingAddressToBillingStreet(){
+    return this.checkoutFormGroup.get('shippingAddress.street');
+  }
+  get shippingAddressToBillingCity(){
+    return this.checkoutFormGroup.get('shippingAddress.city');
+  }
+  get shippingAddressToBillingState(){
+    return this.checkoutFormGroup.get('shippingAddress.state');
+  }
+  get shippingAddressToBillingZipCode(){
+    return this.checkoutFormGroup.get('shippingAddress.zipCode');
+  }
+  get shippingAddressToBillingCountry(){
+    return this.checkoutFormGroup.get('shippingAddress.country');
   }
 
   copyShippingAddressToBillingAddress(event: Event) {
