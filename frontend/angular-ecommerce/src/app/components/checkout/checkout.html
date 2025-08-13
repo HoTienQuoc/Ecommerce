@@ -12,6 +12,23 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="firstName" type="text">
+                                //dirty: did user change field Value
+                                //invalid: did validation fail?
+                                //touched: did field lose focus?
+                                @if(firstName!.invalid && (firstName!.dirty || firstName!.touched)){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (firstName!.hasError('required')||firstName!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                              Name is required.
+                                            </div>
+                                          }
+                                        @if (firstName!.hasError('minlength')) {
+                                            <div>
+                                              Name must be at least 2 characters long.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -22,6 +39,20 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="lastName" type="text">
+                                @if(lastName!.invalid && (lastName!.dirty || lastName!.touched)){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (lastName!.hasError('required')||lastName!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                              Name is required.
+                                            </div>
+                                          }
+                                        @if (lastName!.hasError('minlength')) {
+                                            <div>
+                                              Name must be at least 2 characters long.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -32,6 +63,20 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="email" type="email">
+                                @if(email!.invalid && (email!.dirty || email!.touched)){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (email!.hasError('required')||email!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                              Name is required.
+                                            </div>
+                                          }
+                                        @if (email!.hasError('pattern')) {
+                                            <div>
+                                              Name must be at least 2 characters long.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -45,10 +90,12 @@
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country">
-                                    <option>
-                                        Todo
-                                    </option>
+                                <select formControlName="country" (change)="getStates('shippingAddress')">
+                                    @for(country of countries; track country){
+                                        <option [ngValue]="country">
+                                            {{country.name}}
+                                        </option>
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -80,9 +127,11 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="state">
-                                    <option>
-                                        Todo
-                                    </option>
+                                    @for(state of shippingAddressStates; track state){
+                                        <option [ngValue]="state">
+                                            {{state.name}}
+                                        </option>
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -115,9 +164,13 @@
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country">
+                                <select formControlName="country" (change)="getStates('billingAddress')">
                                     <option>
-                                        Todo
+                                        @for(country of countries; track country){
+                                            <option [ngValue]="country">
+                                                {{country.name}}
+                                            </option>
+                                        }
                                     </option>
                                 </select>
                             </div>
@@ -150,9 +203,11 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <select formControlName="state">
-                                    <option>
-                                        Todo
-                                    </option>
+                                    @for(state of shippingAddressStates; track state){
+                                        <option [ngValue]="state">
+                                            {{state.name}}
+                                        </option>
+                                    }
                                 </select>                            </div>
                         </div>
                     </div>
