@@ -148,6 +148,25 @@ export class Checkout implements OnInit{
     return this.checkoutFormGroup.get('shippingAddress.country');
   }
 
+  ///
+
+  get billingAddressToBillingStreet(){
+    return this.checkoutFormGroup.get('billingAddress.street');
+  }
+  get billingAddressToBillingCity(){
+    return this.checkoutFormGroup.get('billingAddress.city');
+  }
+  get billingAddressToBillingState(){
+    return this.checkoutFormGroup.get('billingAddress.state');
+  }
+  get billingAddressToBillingZipCode(){
+    return this.checkoutFormGroup.get('billingAddress.zipCode');
+  }
+  get billingAddressToBillingCountry(){
+    return this.checkoutFormGroup.get('billingAddress.country');
+  }
+
+
   copyShippingAddressToBillingAddress(event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
   
