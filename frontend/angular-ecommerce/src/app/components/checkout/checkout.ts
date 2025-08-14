@@ -5,6 +5,7 @@ import { Luv2ShopFormServiceService } from '../../services/luv2-shop-form-servic
 import { Country } from '../../common/country';
 import { State } from '../../common/state';
 import { Luv2ShopValidators } from '../../validators/luv2-shop-validators';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -29,12 +30,15 @@ export class Checkout implements OnInit{
 
 
   constructor(private formBuilder: FormBuilder,
-              private luv2ShopFormServiceService: Luv2ShopFormServiceService
+              private luv2ShopFormServiceService: Luv2ShopFormServiceService,
+              private cartService: CartService
   ){
 
   }
 
   ngOnInit(): void {
+    this.reviewCartDetails();
+    
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [
@@ -83,16 +87,16 @@ export class Checkout implements OnInit{
       }),
       creditCard: this.formBuilder.group({
         cardType: new FormControl('', [
-          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+          Validators.required,
         ]),
         nameOnCard: new FormControl('', [
           Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
         ]),
         cardNumber: new FormControl('', [
-          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+          Validators.required,Validators.pattern("[0-9]{16}")
         ]),
         securityCode:new FormControl('', [
-          Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
+          Validators.required,Validators.pattern("[0-9]{3}")
         ]),
         expirationMonth: new FormControl('', [
           Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace
@@ -116,10 +120,22 @@ export class Checkout implements OnInit{
       data=>{this.countries = data}
     ); 
   }
+  
   onSubmit(){
     if(this.checkoutFormGroup.invalid){
       this.checkoutFormGroup.markAllAsTouched();
     }
+  }
+
+  reviewCartDetails() {
+    //subscribe to cartService.totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => this.totalQuantity = totalQuantity
+    );
+    //subscribe to cartService.totalPrice
+    this.cartService.totalPrice.subscribe(
+      totalPrice => this.totalPrice = totalPrice
+    );
   }
 
   get firstName(){
@@ -164,6 +180,21 @@ export class Checkout implements OnInit{
   }
   get billingAddressToBillingCountry(){
     return this.checkoutFormGroup.get('billingAddress.country');
+  }
+
+  //
+
+  get creditCardType(){
+    return this.checkoutFormGroup.get('creditCard.cardType');
+  }
+  get creditCardNameOnCard(){
+    return this.checkoutFormGroup.get('creditCard.nameOnCard');
+  }
+  get creditCardNumber(){
+    return this.checkoutFormGroup.get('creditCard.cardNumber');
+  }
+  get creditCardSecurityCode(){
+    return this.checkoutFormGroup.get('creditCard.securityCode');
   }
 
 

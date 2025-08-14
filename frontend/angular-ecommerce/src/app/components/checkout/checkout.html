@@ -360,6 +360,18 @@
                                         Mastercard
                                     </option>
                                 </select>
+                                @if(creditCardType!.invalid && 
+                                    (creditCardType!.dirty || creditCardType!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (creditCardType!.hasError('required')||
+                                        creditCardType!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                                Credit Card Type is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -370,6 +382,18 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="nameOnCard" type="text">
+                                @if(creditCardNameOnCard!.invalid && 
+                                    (creditCardNameOnCard!.dirty || creditCardNameOnCard!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (creditCardNameOnCard!.hasError('required')||
+                                        creditCardNameOnCard!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                                Credit Card Name On Card is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -380,6 +404,18 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="cardNumber" type="text">
+                                @if(creditCardNumber!.invalid && 
+                                    (creditCardNumber!.dirty || creditCardNumber!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (creditCardNumber!.hasError('required')||
+                                        creditCardNumber!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                                Credit Card Number is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -390,6 +426,18 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="securityCode" type="text">
+                                @if(creditCardSecurityCode!.invalid && 
+                                    (creditCardSecurityCode!.dirty || creditCardSecurityCode!.touched)
+                                ){
+                                    <div class="alert alert-danger mt-1">
+                                        @if (creditCardSecurityCode!.hasError('required')||
+                                        creditCardSecurityCode!.hasError('notOnlyWhiteSpace')) {
+                                            <div>
+                                                Credit Card Security Code is required.
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
