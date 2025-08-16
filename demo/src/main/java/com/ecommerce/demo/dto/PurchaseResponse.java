@@ -4,5 +4,9 @@ import lombok.Data;
 
 @Data
 public class PurchaseResponse {
-    private String orderTrackingNumber;
+    //Another option is using @NonNull annotation on the field
+    //instead of final
+    //@NonNull
+    //private String orderTrackingNumber;
+    private final String orderTrackingNumber;
 }

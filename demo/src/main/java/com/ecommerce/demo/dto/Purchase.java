@@ -10,7 +10,7 @@ import com.ecommerce.demo.entity.OrderItem;
 import lombok.Data;
 
 @Data
-public class PurchaseDto {
+public class Purchase {
     private Customer customer;
     private Address shippingAddress;
     private Address billingAddress;
