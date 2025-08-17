@@ -1,7 +1,18 @@
-@if (auth.isAuthenticated$ | async) {
+@let isAuthenticated = auth.isAuthenticated$ | async;
+@let user = auth.user$ | async;
+
+<div class="login-status-header">
+
+
+@if (isAuthenticated) {
+    <button routerLink="/members" class="security-btn ml-1">Member</button>
+  @if (user) {
+    <span>{{ user.name }}</span>
+  }
   <button (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
     Log out
   </button>
 } @else {
   <button (click)="auth.loginWithRedirect()">Log in</button>
 }
+</div>
