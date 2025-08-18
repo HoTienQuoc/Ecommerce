@@ -61,11 +61,11 @@ public class MyDataRestConfig implements RepositoryRestConfigurer{
         // disable Http methods for Product: PUT, POST, DELETE
         disableHttpMethods(State.class,config, theUnsupporActions);
         
-
         //call an internal helper method
         exposeIds(config);
 
-        
+        // configure cots mapping
+        cors.addMapping("/api/**").allowedOrigins("http://localhost:4200");
 
     }
 
