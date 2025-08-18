@@ -20,7 +20,22 @@ export class CartService {
     totalPrice: Subject<number> = new BehaviorSubject<number>(0);
     totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-    constructor(){}
+    //Reference to web browser's session storage
+    //Once a web browser tab is closed then data is no longer available
+    // storage: Storage = sessionStorage; //Data is lost since we are using sessionStorage
+    storage: Storage = localStorage;//data is persisted and survives browser restarts
+
+
+    constructor(){
+        // read data from storage
+        //JSON. parse(...) Reads JSON string and converts to object
+        let data = JSON.parse(this.storage.getItem('cartItems')!);
+        if(data!=null){
+            this.cartItems = data;
+            // compute totals based on the data that is read from storage
+            this.computeCartTotals();
+        }
+    }
 
     addToCart(theCartItem: CartItem){
         //check if we already have the item in our cart
@@ -77,7 +92,15 @@ export class CartService {
 
         // log cart data just for debugging purposes
         this.logCartData(totalPriceValue, totalQuantityValue);
+
+        // persist cart data
+        this.persistCartItems();
     }
+
+    persistCartItems() {
+        this.storage.setItem('cartItems', JSON.stringify(this.cartItems))
+    }
+
     logCartData(totalPriceValue: number, totalQuantityValue: number) {
         for(let tempCartItem of this.cartItems){
             const subTotalPrice = tempCartItem.quantity * tempCartItem.unitPrice;
