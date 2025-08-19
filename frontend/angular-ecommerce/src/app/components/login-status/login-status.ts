@@ -10,6 +10,9 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrl: './login-status.scss'
 })
 export class LoginStatus {
+  storage: Storage = sessionStorage;
+
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}
+
 
 }
