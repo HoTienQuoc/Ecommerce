@@ -7,12 +7,14 @@ import { LoginStatus } from './components/login-status/login-status';
 import { MembersPage } from './components/members-page/members-page';
 import { AuthGuard } from '@auth0/auth0-angular';
 import { Injector } from '@angular/core';
+import { OrderHistory } from './components/order-history/order-history';
 
 function sendToLoginPage(injector: Injector){
     const router = injector.get(Router);
     router.navigate(["/login"]);
 }
 export const routes: Routes = [
+    {path: 'order-history', component: OrderHistory, canActivate: [AuthGuard], data: {onAuthRequired: sendToLoginPage}},
     {path: 'members', component: MembersPage, canActivate: [AuthGuard], data: {onAuthRequired: sendToLoginPage}},
     {path: 'login', component: LoginStatus},
     {path: 'checkout', component: Checkout},

@@ -1,4 +1,4 @@
-export class OrderHistory {
+export class OrderHistory2 {
     constructor(
         public id: string,
         public orderTrackingNumber: string,

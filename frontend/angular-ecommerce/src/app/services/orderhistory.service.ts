@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderHistory } from '../common/order-history';
+import { OrderHistory2 } from '../common/order-history';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OderhistoryService {
+export class OrderHistoryService {
   private orderUrl = 'http://localhost:8080/api/orders';
   constructor(private httpClient: HttpClient) { }
 
   getOrderHistory(theEmail: string): Observable<GetResponseOrderHistory> {
     // need to build URL based on the customer email
-    const orderHistoryUrl = `${this.orderUrl}/search/findByCustomerEmail?email=${theEmail}`;
+    const orderHistoryUrl = `${this.orderUrl}/search/findByCustomerEmailOrderByDateCreatedDesc?email=${theEmail}`;
 
     return this.httpClient.get<GetResponseOrderHistory>(orderHistoryUrl);
   }
@@ -21,6 +21,6 @@ export class OderhistoryService {
 
 interface GetResponseOrderHistory{
   _embedded: {
-    orders: OrderHistory[];
+    orders: OrderHistory2[];
   }
 }

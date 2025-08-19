@@ -36,7 +36,8 @@ public class Address {
     @Column(name="zipcode")
     private String zipcode;
 
-    @OneToOne
+    @OneToOne(mappedBy = "billingAddress") // or "shippingAddress" depending on usage
     @PrimaryKeyJoinColumn
     private Order order;
+
 }
